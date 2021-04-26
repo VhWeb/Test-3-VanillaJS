@@ -25,23 +25,22 @@ window.addEventListener('scroll', function (e) {
     console.log('top', `${lastScrollTop} > ${scroll}`);
   } else if (lastScrollTop < scroll) {
     body.style.overflowX = 'hidden'
-    bigCircle.style.transform = (`scale(${(300 + scroll / 100) / 100})`);
-    smallCircle.style.transform = `translate(-50%, -50%) scale(${(300 + scroll / 100) / 100})`
-    title.style.opacity = `${300 - scroll}`
-    circleBlock.style.opacity = `${300 - scroll}`
+    bigCircle.style.transform = (`scale(${(250 + scroll / 100) / 100})`);
+    smallCircle.style.transform = `translate(-50%, -50%) scale(${(250 + scroll / 100) / 100})`
+    title.style.opacity = `${500 - scroll}`
+    circleBlock.style.opacity = `${500 - scroll}`
     console.log('down', `${lastScrollTop} < ${scroll}`);
   }
   lastScrollTop = scroll;
 });
 
-function checkMediaQuery() {
-  if (window.innerWidth < 720) {
-    rows[1].classList.add('reverse');
-  } else {
-    rows[1].classList.remove('reverse');
-  }
-}
+let media_query = 'screen and (max-width:720px)';
+let matched = window.matchMedia(media_query).matches;
 
-window.addEventListener('resize', checkMediaQuery);
+if (matched) {
+  rows[1].classList.add('reverse');
+} else {
+  rows[1].classList.remove('reverse');
+}
 
 AOS.init();
