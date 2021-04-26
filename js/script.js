@@ -4,7 +4,11 @@ const bigCircle = document.querySelector('.circle');
 const title = document.querySelector('.title');
 const body = document.querySelector('body');
 const header = document.querySelector('#header');
-const rows = document.querySelectorAll('.row')
+const rows = document.querySelectorAll('.row');
+const arrow = document.querySelector('.arrow');
+const span = document.querySelector('.title span');
+const titleContent = document.querySelector('.title .title-content');
+const main = document.querySelector('.main-block')
 
 function isScrolledIntoView(el) {
   const rect = el.getBoundingClientRect();
@@ -17,18 +21,24 @@ function isScrolledIntoView(el) {
 let lastScrollTop = 0;
 window.addEventListener('scroll', function (e) {
   let scroll = window.pageYOffset;
-  if (lastScrollTop > scroll && !isScrolledIntoView(header)) {
+  if (lastScrollTop > scroll && !isScrolledIntoView(main)) {
+    span.style.transform = `translate(0%, 0%)`;
+    titleContent.style.transform = `translate(0%, 0%)`;
+    arrow.style.transform = `translate(0%, 0%)`;
     bigCircle.style.transform = 'scale(1)'
     smallCircle.style.transform = 'translate(-50%, -50%)'
     title.style.opacity = '1'
     circleBlock.style.opacity = '1'
     console.log('top', `${lastScrollTop} > ${scroll}`);
   } else if (lastScrollTop < scroll) {
-    body.style.overflowX = 'hidden'
+    span.style.transform = `translate(0%, -${1250 + scroll / 100}%)`;
+    titleContent.style.transform = `translate(0%, -${250 + scroll / 100}%)`;
+    arrow.style.transform = `translate(0%, ${250 + scroll / 100}%)`;
+    body.style.overflowX = 'hidden';
     bigCircle.style.transform = (`scale(${(250 + scroll / 100) / 100})`);
     smallCircle.style.transform = `translate(-50%, -50%) scale(${(250 + scroll / 100) / 100})`
-    title.style.opacity = `${500 - scroll}`
-    circleBlock.style.opacity = `${500 - scroll}`
+    title.style.opacity = `${500 - scroll}`;
+    circleBlock.style.opacity = `${500 - scroll}`;
     console.log('down', `${lastScrollTop} < ${scroll}`);
   }
   lastScrollTop = scroll;

@@ -21,7 +21,7 @@ body {
 }
 
 .contents {
-    margin: 16.9375em 0px;
+    margin: 8.9375em 0px;
 }
 
 .ps-header {
@@ -178,6 +178,7 @@ p {
 
 .arrow {
     font-size: 25px;
+    transition: 2s;
 }
 
 main {
@@ -205,6 +206,8 @@ main {
     height: 350px;
     flex-direction: column;
     position: absolute;
+    width: 100%;
+    max-width: 700px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -215,6 +218,7 @@ main {
 
 .title span {
     font-size: 24px;
+    transition: 2s;
 }
 
 .title-content {
@@ -223,6 +227,7 @@ main {
     background: black;
     color: white;
     font-size: 72px;
+    transition: 2s;
 }
 
 .title-circle {
@@ -310,6 +315,7 @@ main {
     max-width: 635px;
     width: 100%;
     height: 324px;
+    border-radius: 7px;
 }
 
 .row-column_two img {
