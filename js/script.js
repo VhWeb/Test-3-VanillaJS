@@ -6,8 +6,6 @@ const body = document.querySelector('body');
 const header = document.querySelector('#header');
 const rows = document.querySelectorAll('.row')
 
-window.onscroll = magic;
-
 function isScrolledIntoView(el) {
   const rect = el.getBoundingClientRect();
   const elemTop = rect.top;
@@ -16,20 +14,25 @@ function isScrolledIntoView(el) {
   return isVisible;
 }
 
-function magic(){
-  if (isScrolledIntoView(header)) {
-    body.style.overflowX = 'hidden'
-    bigCircle.style.transform = 'scale(3.5)'
-    smallCircle.style.transform = 'translate(-50%, -50%) scale(2)'
-    title.style.opacity = '0'
-    circleBlock.style.opacity = '0'
-  } else {
+let lastScrollTop = 0;
+window.addEventListener('scroll', function (e) {
+  let scroll = window.pageYOffset;
+  if (lastScrollTop > scroll && !isScrolledIntoView(header)) {
     bigCircle.style.transform = 'scale(1)'
     smallCircle.style.transform = 'translate(-50%, -50%)'
     title.style.opacity = '1'
     circleBlock.style.opacity = '1'
+    console.log('top', `${lastScrollTop} > ${scroll}`);
+  } else if (lastScrollTop < scroll) {
+    body.style.overflowX = 'hidden'
+    bigCircle.style.transform = (`scale(${(300 + scroll / 100) / 100})`);
+    smallCircle.style.transform = `translate(-50%, -50%) scale(${(300 + scroll / 100) / 100})`
+    title.style.opacity = `${300 - scroll}`
+    circleBlock.style.opacity = `${300 - scroll}`
+    console.log('down', `${lastScrollTop} < ${scroll}`);
   }
-}
+  lastScrollTop = scroll;
+});
 
 function checkMediaQuery() {
   if (window.innerWidth < 720) {
@@ -39,7 +42,6 @@ function checkMediaQuery() {
   }
 }
 
-// Add a listener for when the window resizes
 window.addEventListener('resize', checkMediaQuery);
 
 AOS.init();
