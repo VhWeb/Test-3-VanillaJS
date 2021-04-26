@@ -300,6 +300,10 @@ main {
     padding: 30px;
 }
 
+.row-column_two p {
+    margin-bottom: 25px;
+}
+
 .row-column_two .image {
     position: relative;
     overflow:hidden;
@@ -360,7 +364,7 @@ main {
         margin: 6.9375em 0px;
     }
     .circle {
-        bottom: 150px;
+        bottom: 200px;
     }
     .circle-content {
         max-height: 980px;
